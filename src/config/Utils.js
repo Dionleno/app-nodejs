@@ -27,6 +27,7 @@ module.exports.onError = (server) => {
   }
 }
 module.exports.onListening = (server) => {
+
   return () => {
     let addr = server.address();
     let bind = (typeof addr === 'string') ? `pipe ${addr}` : `port ${addr.port}`;

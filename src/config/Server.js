@@ -26,9 +26,9 @@ app.use(express.static('./app/public'));
 
 //autoload dos arquivos de rotas e conexao
 consign()
-    // .include('app/routes')
+    .include('src/resources')
     // .then('config/mongodb.js')
-    .then('app/models')
+    // .then('app/models')
     // .then('app/controllers')
     .into(app)
 
