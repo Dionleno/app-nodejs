@@ -29,7 +29,7 @@ export interface UserModel extends BaseModelInterface, Sequelize.Model<UserInsta
 export default (sequelize: Sequelize.Sequelize, DataType: Sequelize.DataTypes): Sequelize.Model<UserInstance, UserAttributes> => {
   const attr: SequelizeAttributes<UserAttributes> = {
     id: {
-      type: DataType.NUMBER,
+      type: DataType.INTEGER,
       allowNull: false,
       primaryKey: true,
       autoIncrement: true
@@ -51,7 +51,7 @@ export default (sequelize: Sequelize.Sequelize, DataType: Sequelize.DataTypes): 
       }
     }
   };
-  const user: UserModel = sequelize.define<UserInstance, UserAttributes>('User', attr, {
+  const User: UserModel = sequelize.define<UserInstance, UserAttributes>('User', attr, {
     tableName: "users",
     hooks: {
       beforeCreate: (user: UserInstance, options: Sequelize.CreateOptions): void => {
@@ -61,10 +61,10 @@ export default (sequelize: Sequelize.Sequelize, DataType: Sequelize.DataTypes): 
     }
   });
 
-  user.associate = (models: ModelsInterface) => { };
+  User.associateModel = (models: ModelsInterface) => { };
 
-  user.prototype.isPassword = (encodePassword: string, password: string): boolean => {
+  User.prototype.isPassword = (encodePassword: string, password: string): boolean => {
     return compareSync(password, encodePassword);
   }
-  return user;
+  return User;
 }
